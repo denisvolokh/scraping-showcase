@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "data-theorem-assessment"
+version = "0.1.0"
+description = "The web application's functionality is to retrieve information about a specific Android application available on the Aptoide mobile application marketplace (https://en.aptoide.com/) and display it to the user."
+authors = ["Denis Volokh <denis.volokh@gmail.com>"]
+readme = "README.md"
+packages = [{include = "data_theorem_assessment"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+falcon = "^3.1.3"
+gunicorn = "^21.2.0"
+mkdocs = "^1.5.3"
+pre-commit = "^3.5.0"
+pyproject-flake8 = "^6.1.0"
+mypy = "^1.7.1"
+black = "^23.11.0"
+isort = "^5.12.0"
+requests = "^2.31.0"
+marshmallow = "^3.20.1"
+falcon-swagger-ui = "^1.2.2"
+falcon-apispec = "^0.4.0"
+pytest = "^7.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+multi_line_output=3
+include_trailing_comma = true
+force_grid_wrap=0
+use_parentheses = true
+line_length=88
+
+[tool.flake8]
+ignore = "E203, E266, E501, W503"
+max-line-length = 88
+max-complexity = 18
+select = "B,C,E,F,W,T4"
+
+[tool.mypy]
+files="api/*.py"
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true

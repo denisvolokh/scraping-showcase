@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/search": {
+    "/scrape": {
       "get": {
         "responses": {
           "200": {
@@ -13,20 +13,20 @@
             "description": "Internal server error"
           }
         },
-        "summary": "Get search results",
-        "description": "Returns a list of search results",
+        "summary": "Get scrape result",
+        "description": "Returns a scrape result from the target URL",
         "tags": [
-          "Search"
+          "Scrape"
         ],
         "parameters": [
           {
             "in": "query",
-            "name": "query",
+            "name": "target_url",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "Search query string"
+            "description": "Target URL to scrape"
           }
         ]
       }
@@ -62,17 +62,14 @@
           }
         }
       },
-      "SearchResult": {
+      "ScrapeResult": {
         "type": "object",
         "properties": {
-          "query": {
+          "target_url": {
             "type": "string"
           },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ResultItem"
-            }
+          "result": {
+            "$ref": "#/components/schemas/ResultItem"
           },
           "error": {
             "type": "string"

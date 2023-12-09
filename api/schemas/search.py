@@ -10,7 +10,7 @@ class ResultItemSchema(Schema):
     app_release_date = fields.Str()
 
 
-class SearchResultSchema(Schema):
-    query = fields.Str()
-    results = fields.List(fields.Nested(ResultItemSchema))
+class ScrapeResultSchema(Schema):
+    target_url = fields.Str()
+    result = fields.Nested(ResultItemSchema)
     error = fields.Str()

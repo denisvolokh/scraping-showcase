@@ -6,9 +6,9 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from falcon_swagger_ui import register_swaggerui_app
 
-from api.routes.search import SearchResource
+from api.routes.search import ScrapeResource
 from api.routes.static import StaticFileHandler
-from api.schemas.search import SearchResultSchema
+from api.schemas.search import ScrapeResultSchema
 
 STATIC_PATH = pathlib.Path(__file__).parent / "static"
 SWAGGERUI_URL = "/swagger"
@@ -35,9 +35,9 @@ def create_spec(app: falcon.App) -> APISpec:
             MarshmallowPlugin(),
         ],
     )
-    spec.components.schema("SearchResult", schema=SearchResultSchema)
+    spec.components.schema("ScrapeResult", schema=ScrapeResultSchema)
     spec.path(
-        path="/search",
+        path="/scrape",
         operations=dict(
             get=dict(
                 responses={
@@ -45,18 +45,18 @@ def create_spec(app: falcon.App) -> APISpec:
                     400: {"description": "Invalid request"},
                     500: {"description": "Internal server error"},
                 },
-                summary="Get search results",
-                description="Returns a list of search results",
-                tags=["Search"],
+                summary="Get scrape result",
+                description="Returns a scrape result from the target URL",
+                tags=["Scrape"],
                 parameters=[
                     {
                         "in": "query",
-                        "name": "query",
+                        "name": "target_url",
                         "required": True,
                         "schema": {
                             "type": "string",
                         },
-                        "description": "Search query string",
+                        "description": "Target URL to scrape",
                     }
                 ],
             )
@@ -73,7 +73,7 @@ def setup_routes(app: falcon.App) -> None:
         app (falcon.App): Falcon application
     """
 
-    app.add_route("/search", SearchResource())
+    app.add_route("/scrape", ScrapeResource())
     app.add_route(
         "/static/v1/swagger.json", StaticFileHandler(f"{STATIC_PATH}/v1/swagger.json")
     )

@@ -6,9 +6,9 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from falcon_swagger_ui import register_swaggerui_app
 
-from api.routes.search import ScrapeResource
+from api.routes.scrape import ScrapeResource
 from api.routes.static import StaticFileHandler
-from api.schemas.search import ScrapeResultSchema
+from api.schemas.scrape import ScrapeResultSchema
 
 STATIC_PATH = pathlib.Path(__file__).parent / "static"
 SWAGGERUI_URL = "/swagger"

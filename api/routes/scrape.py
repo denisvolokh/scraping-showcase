@@ -2,7 +2,8 @@ import falcon
 from falcon import Request, Response
 from marshmallow import ValidationError
 
-from api.schemas.search import ScrapeResultSchema
+from api.schemas.scrape import ScrapeResultSchema
+from api.tasks import task_scrape_target
 
 
 class ScrapeResource:
@@ -22,14 +23,7 @@ class ScrapeResource:
             result = schema.dump(
                 {
                     "target_url": target_url,
-                    "result": {
-                        "app_name": "app1",
-                        "app_version": "1.0.0",
-                        "app_description": "app1 desc",
-                        "no_downloads": 100,
-                        "app_url": "https://app1.com",
-                        "app_release_date": "2020-01-01",
-                    },
+                    "result": task_scrape_target(target_url),
                 }
             )
             resp.media = result

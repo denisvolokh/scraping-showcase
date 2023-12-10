@@ -34,3 +34,12 @@ Overall, the purpose of this exercise for us is to see your "production-level" c
 
 ## Timeline:
 Once you have been given access to these instructions, we would like to get your source code back within a week, ideally. If you lack time (due to work or other life events) and are not able to deliver within a week, it is totally fine but please contact the person who sent you the instructions to discuss a new timeline.
+
+# Implementation
+
+
+
+## To Do
+
+- [] Cache the results of the web scraping
+- [] Add a CI/CD pipeline to build and deploy the application

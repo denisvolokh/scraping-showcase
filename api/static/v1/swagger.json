@@ -39,7 +39,7 @@
   "openapi": "3.0.2",
   "components": {
     "schemas": {
-      "ResultItem": {
+      "Scrape": {
         "type": "object",
         "properties": {
           "app_name": {
@@ -52,7 +52,7 @@
             "type": "string"
           },
           "no_downloads": {
-            "type": "integer"
+            "type": "string"
           },
           "app_url": {
             "type": "string"
@@ -69,7 +69,7 @@
             "type": "string"
           },
           "result": {
-            "$ref": "#/components/schemas/ResultItem"
+            "$ref": "#/components/schemas/Scrape"
           },
           "error": {
             "type": "string"

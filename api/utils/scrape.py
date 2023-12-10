@@ -162,6 +162,7 @@ def scrape_target_page(url: str) -> Optional[dict]:
 
     tree = html.fromstring(content)
     return {
+        "app_url": base_url,
         "app_name": scrape_app_name(tree),
         "no_downloads": scrape_no_downloads(tree),
         "app_description": scrape_app_description(tree),

@@ -12,32 +12,28 @@ services:
     command: >
       sh -c 'gunicorn --reload -b 0.0.0.0:5000 api.main:app '
 
-  # tasks:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - database
-  #     - redis
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - ./api:/code/api
-  #   command: >
-  #     sh -c 'dockerize -wait tcp://database:5432 -timeout 1m &&
-  #     celery -A api.tasks.celery worker --loglevel=info'
-
-  mkdocs:
+  tasks:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "5001:5001"
-    working_dir: /
+    depends_on:
+      - redis
     volumes:
-      - ./docs:/docs
-      - ./mkdocs.yml:/mkdocs.yml
-    command: mkdocs serve --dev-addr=0.0.0.0:5001 --livereload
+      - ./api:/code/api
+    command: >
+      sh -c 'celery -A api.tasks.celery worker --loglevel=info'
+
+  # mkdocs:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5001:5001"
+  #   working_dir: /
+  #   volumes:
+  #     - ./docs:/docs
+  #     - ./mkdocs.yml:/mkdocs.yml
+  #   command: mkdocs serve --dev-addr=0.0.0.0:5001 --livereload
 
   redis:
     image: redis:latest

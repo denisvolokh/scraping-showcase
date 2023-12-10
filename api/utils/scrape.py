@@ -5,6 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import html
 
+from api.utils.url import convert_to_base_url
+
 logging.basicConfig(level=logging.INFO)
 
 APP_NAME_XPATH = (
@@ -153,8 +155,8 @@ def scrape_target_page(url: str) -> Optional[dict]:
     Args:
         url (str): URL of the target page
     """
-
-    content = fetch_page_content(url)
+    base_url = convert_to_base_url(url)
+    content = fetch_page_content(base_url)
     if not content:
         return None
 
@@ -164,7 +166,7 @@ def scrape_target_page(url: str) -> Optional[dict]:
         "no_downloads": scrape_no_downloads(tree),
         "app_description": scrape_app_description(tree),
         "app_release_date": scrape_app_release_date(tree),
-        "app_version": scrape_app_version(url),
+        "app_version": scrape_app_version(base_url),
     }
 
 

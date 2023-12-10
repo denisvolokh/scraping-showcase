@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/code/api
+    command: >
+      sh -c 'gunicorn --reload -b 0.0.0.0:5000 api.main:app '
+
+  # tasks:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - database
+  #     - redis
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./api:/code/api
+  #   command: >
+  #     sh -c 'dockerize -wait tcp://database:5432 -timeout 1m &&
+  #     celery -A api.tasks.celery worker --loglevel=info'
+
+  mkdocs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    working_dir: /
+    volumes:
+      - ./docs:/docs
+      - ./mkdocs.yml:/mkdocs.yml
+    command: mkdocs serve --dev-addr=0.0.0.0:8000 --livereload
+
+  redis:
+    image: redis:latest
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pg_data: {}
+  pg_backups: {}

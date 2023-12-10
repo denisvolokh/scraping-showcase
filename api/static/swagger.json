@@ -1,0 +1,175 @@
+{
+  "paths": {
+    "/v1/scrape": {
+      "get": {
+        "description": "Returns a scrape result from the target URL",
+        "tags": [
+          "Sync Scrape"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "target_url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target URL to scrape"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScrapeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/scrape": {
+      "get": {
+        "description": "Returns a task ID for the started async scraping task",
+        "tags": [
+          "Async Scrape"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "target_url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target URL to scrape"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncScrapeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/scrape/result/{task_id}": {
+      "get": {
+        "description": "Returns the result of the async scraping task",
+        "tags": [
+          "Async Scrape"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "task_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the task to get the result for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncScrapeResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Swagger Scrape App API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.2",
+  "components": {
+    "schemas": {
+      "Scrape": {
+        "type": "object",
+        "properties": {
+          "app_name": {
+            "type": "string"
+          },
+          "app_version": {
+            "type": "string"
+          },
+          "app_description": {
+            "type": "string"
+          },
+          "no_downloads": {
+            "type": "string"
+          },
+          "app_url": {
+            "type": "string"
+          },
+          "app_release_date": {
+            "type": "string"
+          }
+        }
+      },
+      "ScrapeResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Scrape"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "AsyncScrapeResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Scrape"
+          },
+          "error": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

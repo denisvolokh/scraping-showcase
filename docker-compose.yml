@@ -32,12 +32,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "5001:5001"
     working_dir: /
     volumes:
       - ./docs:/docs
       - ./mkdocs.yml:/mkdocs.yml
-    command: mkdocs serve --dev-addr=0.0.0.0:8000 --livereload
+    command: mkdocs serve --dev-addr=0.0.0.0:5001 --livereload
 
   redis:
     image: redis:latest

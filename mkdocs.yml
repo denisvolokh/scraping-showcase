@@ -1,0 +1,6 @@
+site_name: Scrape API 
+repo_url: https://github.com/denisvolokh/data-theorem-assessment
+site_author: Denis Volokh
+
+nav:
+  - Docs: index.md

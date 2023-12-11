@@ -2,6 +2,7 @@ version: '3'
 
 services:
   api:
+    container_name: api
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
       sh -c 'gunicorn --reload -b 0.0.0.0:5000 api.main:app '
 
   tasks:
+    container_name: tasks
     build:
       context: .
       dockerfile: Dockerfile
@@ -34,6 +36,20 @@ services:
   #     - ./docs:/docs
   #     - ./mkdocs.yml:/mkdocs.yml
   #   command: mkdocs serve --dev-addr=0.0.0.0:5001 --livereload
+
+  webapp:
+    container_name: webapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    depends_on:
+      - api
+    volumes:
+      - ./webapp:/code/webapp
+    command: >
+      streamlit run webapp/app.py --server.port 5001
 
   redis:
     image: redis:latest

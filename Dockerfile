@@ -1,12 +1,23 @@
-FROM python:3.10-alpine
+# FROM python:3.10-alpine
+FROM python:3.10-slim
 
 RUN pip install --upgrade pip
 
 # Install system dependencies
-RUN apk update && apk add python3-dev \
-                          gcc \
-                          libc-dev \
-                          libffi-dev
+# RUN apk update && apk add python3-dev \
+#                           gcc \
+#                           g++ \
+#                           libc-dev \
+#                           libffi-dev \
+#                           cmake
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 # install prerequisites
 RUN pip install poetry==1.5.1
@@ -27,3 +38,5 @@ RUN poetry config virtualenvs.create false && poetry install --no-root
 
 # Copy the rest of the application
 COPY ./api /code/api
+
+COPY ./webapp /code/webapp

@@ -1,32 +1,24 @@
-import urllib.parse
+import logging
 
 import requests
 import streamlit as st
+
+from .utils import validate_url
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class SynchHome:
     class Model:
         pageTitle = "Sync Scraping"
 
-    def validate_url(self, url: str) -> bool:
-        """Validate the URL
-
-        Args:
-            url (str): The URL to validate
-
-        Returns:
-            bool: True if the URL is valid, False otherwise
-        """
-
-        parsed_url = urllib.parse.urlparse(url)
-        domain = parsed_url.netloc
-
-        return domain.endswith("aptoide.com")
-
     def view(self, model):
         st.title(model.pageTitle)
 
         st.write("Scraping a page in synchronous mode.")
+
+        logger.info("Rendering page...")
 
         # Initialize chat history
         if "messages" not in st.session_state:
@@ -39,7 +31,7 @@ class SynchHome:
 
         prompt = st.chat_input("Enter a URL to scrape")
         if prompt:
-            if not self.validate_url(prompt):
+            if not validate_url(prompt):
                 st.error(
                     "Invalid URL, example of a valid URL: https://infinite-magicraid.en.aptoide.com/"
                 )

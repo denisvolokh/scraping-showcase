@@ -169,9 +169,3 @@ def scrape_target_page(url: str) -> Optional[dict]:
         "app_release_date": scrape_app_release_date(tree),
         "app_version": scrape_app_version(base_url),
     }
-
-
-if __name__ == "__main__":
-    scrape_target_page("https://lords-mobile.en.aptoide.com")
-    scrape_target_page("https://infinite-magicraid.en.aptoide.com")
-    scrape_target_page("https://nobody-s-adventure-chop-chop.en.aptoide.com")

@@ -1,6 +1,13 @@
-site_name: Scrape API 
+site_name: Data Theorem Assessment 
 repo_url: https://github.com/denisvolokh/data-theorem-assessment
 site_author: Denis Volokh
 
 nav:
-  - Docs: index.md
+  - Assessment: assessment.md
+  - Setup: setup.md
+  - Solution: solution.md
+  - API Docs: swagger.md
+
+plugins:
+  - render_swagger:
+      allow_arbitrary_locations : true

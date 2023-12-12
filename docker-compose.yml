@@ -11,7 +11,7 @@ services:
     volumes:
       - ./api:/code/api
     command: >
-      sh -c 'gunicorn --reload -b 0.0.0.0:5000 api.main:app '
+      sh -c 'uvicorn api.main:app --host 0.0.0.0 --port 5000'
 
   tasks:
     container_name: tasks
@@ -25,17 +25,18 @@ services:
     command: >
       sh -c 'celery -A api.tasks.celery worker --loglevel=info'
 
-  # mkdocs:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5001:5001"
-  #   working_dir: /
-  #   volumes:
-  #     - ./docs:/docs
-  #     - ./mkdocs.yml:/mkdocs.yml
-  #   command: mkdocs serve --dev-addr=0.0.0.0:5001 --livereload
+  mkdocs:
+    container_name: mkdocs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    working_dir: /
+    volumes:
+      - ./docs:/docs
+      - ./mkdocs.yml:/mkdocs.yml
+    command: mkdocs serve --dev-addr=0.0.0.0:5002 --livereload
 
   webapp:
     container_name: webapp
@@ -53,7 +54,7 @@ services:
 
   redis:
     image: redis:latest
-    container_name: my-redis
+    container_name: redis
     ports:
       - "6379:6379"
 

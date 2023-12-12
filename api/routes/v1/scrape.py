@@ -7,7 +7,7 @@ from api.utils.scrape import scrape_target_page
 
 
 class ScrapeResource:
-    def on_get(self, req: Request, resp: Response) -> None:
+    async def on_get(self, req: Request, resp: Response) -> None:
         """Request to scrape target URL (synchronous)
         ---
         description: Returns a scrape result from the target URL

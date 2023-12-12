@@ -53,7 +53,7 @@ max-complexity = 18
 select = "B,C,E,F,W,T4"
 
 [tool.mypy]
-files="api/*.py"
+files="api/*.py, webapp/*.py"
 check_untyped_defs = true
 disallow_untyped_defs = true
 ignore_missing_imports = true

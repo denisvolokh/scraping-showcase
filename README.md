@@ -1,36 +1,96 @@
 # Data Theorem Assessment
 
-## Goal:
-Build a functional web application using Python, and any framework/library you are comfortable with.
-The web application's functionality is to retrieve information about a specific Android application available on the Aptoide mobile application marketplace (https://en.aptoide.com/) and display it to the user.
-We discourage the use of any public or private APIs for retrieving the data, as we are interested in seeing how web scraping is implemented in your project.
+## Setup Dev Environment
 
-### Sample user flow:
-The user flow should be the following:
-1. I access the home page where I can paste an App's Aptoide URL into a text box and submit it. For example, the URL to the Lords Mobile App on the Aptoide is https://lords-mobile.en.aptoide.com/
-2. After submitting the URL, the website returns a page displaying the following information about the App:
-* App's name
-* App's version
-* Number of downloads
-* Release date
-* App's description
+### Checkout the code
 
-## Things we care about:
-Overall, the purpose of this exercise for us is to see your "production-level" code. Rather than a "personal" or "learning" project that you would work on on your own, think of this exercise as a project:
-* You would deploy to production
-* That might be used by customers
-* That other people on the team would have to maintain, extend, etc.
+```bash
+git clone git@github.com:denisvolokh/data-theorem-assessment.git
+```
 
-## Additional requirements:
-* Please use Falcon to write your API endpoint(s). Other web frameworks such as Django, Django REST or Flask are not allowed for this exercise.
-* Please write type annotations in your Python code. They are optional, but we require them in all of our code because of how useful they are. In the context of this exercise, this means that once you’ve completed it, the Python type checker tool called mypy should return 0 errors when ran against your code base.
-* Please provide unit tests alongside your code. 
+### Install Poetry and packages
 
-## Things we do not care about:
-* Having a pretty user interface.
-* Having complex or impressive frontend code (HTML, JavaScript). We are more interested in your Python code (as you are interviewing for a backend position) and it is what you should spend most of your time on.
-* Getting your code back very quickly after we sent the instructions; this is not a speed exercise and we don't take it into account when reviewing your code.
-* Actually deploying the application (to AWS, GCP, Heroku, etc.) is not in scope; we are only looking for the application code.
+```bash
+pip install poetry
+poetry install
+```
 
-## Timeline:
-Once you have been given access to these instructions, we would like to get your source code back within a week, ideally. If you lack time (due to work or other life events) and are not able to deliver within a week, it is totally fine but please contact the person who sent you the instructions to discuss a new timeline.
+### Activate the virtual environment
+
+```bash
+poetry shell
+```
+
+### Install pre-commit hooks
+
+```bash
+poetry run pre-commit install
+```
+
+### Run application in Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+Verify that all services are running:
+
+```bash
+docker-compose ps
+```
+
+Expected output:
+
+```bash
+Name    | Image                           | Created         | Status     |    Ports               |
+--------|---------------------------------|-----------------|------------|------------------------|
+api     | data-theorem-assessment-api     | 2 minutes ago   | Up         | 0.0.0.0:5000->5000/tcp |
+mkdocs  | data-theorem-assessment-mkdocs  | 2 minutes ago   | Up         | 0.0.0.0:5002->5002/tcp |
+redis   | redis:latest                    | 2 minutes ago   | Up         | 0.0.0.0:6379->6379/tcp |
+tasks   | data-theorem-assessment-tasks   | 2 minutes ago   | Up         |                        |
+webapp  | data-theorem-assessment-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
+```
+
+The API server is available at [http://0.0.0.0:5000/](http://0.0.0.0:5000/).
+
+The MkDocs server is available at [http://0.0.0.0:5002/](http://0.0.0.0:5002/).
+
+The web application is available at [http://0.0.0.0:5001/](http://0.0.0.0:5001/).
+
+
+## Code Quality
+
+The project is configured to use [pre-commit](https://pre-commit.com/) hooks to ensure code quality. The following hooks are configured:
+
+- [isort](https://pypi.org/project/isort/) - sorts imports
+- [black](https://pypi.org/project/black/) - formats code
+- [flake8](https://flake8.pycqa.org/en/latest/) - lints code
+- [mypy](https://mypy.readthedocs.io/en/stable/) - type checks code
+
+The pre-commit configuration is stored in the `.pre-commit-config.yaml` file and hooks are configured in the `pyproject.toml` file.
+
+The hooks are configured to run automatically on commit but can also be run manually. To run the hooks manually, run the following command:
+
+```bash
+poetry run mypy
+```
+
+## Testing
+
+The project is configured to use [pytest](https://docs.pytest.org/en/stable/) to run tests. The tests are stored in the `api/tests` To run the tests manually, run the following command:
+
+```bash
+pytest
+```
+
+Note: Make sure that pytest executable is installed in the virtual environment. To check which pytest executable is used, run the following command:
+
+```bash
+which pytest
+```
+
+It should return the path to the pytest executable in the virtual environment:
+
+```bash
+/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/data-theorem-assessment-oHUsPNxH-py3.10/bin/pytest
+```

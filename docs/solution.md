@@ -137,3 +137,8 @@ To simplify the deployment of the API server, the `docker-compose.yml` file is p
 * `mkdocs` - the MkDocs server used to serve the API documentation
 * `webapp` - the web application used to showcase the use of the API server
 
+## Web Application
+
+To showcase the use of the API server, a simple web application is provided. It is implemented using the Streamlit framework. Streamlit is an open-source Python library that makes it easy to build beautiful custom web applications. The web application is implemented in the `webapp/app.py` file.
+
+After starting services with docker-compose, the web application can be accessed at [http://0.0.0.0:5001/](http://0.0.0.0:5001/)

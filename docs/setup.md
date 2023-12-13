@@ -51,6 +51,10 @@ tasks   | data-theorem-assessment-tasks   | 2 minutes ago   | Up         |      
 webapp  | data-theorem-assessment-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
 ```
 
+The MkDocs server is available at [http://0.0.0.0:5002/](http://0.0.0.0:5002/).
+
+The web application is available at [http://0.0.0.0:5001/](http://0.0.0.0:5001/).
+
 
 ## Code Quality
 

@@ -121,7 +121,11 @@ To extend the asyncronous API with the ability to stream the scraping results to
 
 ## Testing
 
-The scraping logic is tested using the pytest framework.
+The scraping logic and all routes of the API server are covered by unit tests. The tests are implemented in the `api/tests` directory. To run the tests, execute the following command:
+
+```bash
+pytest
+```
 
 ## Docker Compose
 

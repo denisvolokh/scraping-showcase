@@ -71,14 +71,20 @@ poetry run mypy
 
 ## Testing
 
-### Enter the container
-
-```bash
-docker exec -it api bash
-```
-
-### Run tests
+The project is configured to use [pytest](https://docs.pytest.org/en/stable/) to run tests. The tests are stored in the `api/tests` To run the tests manually, run the following command:
 
 ```bash
 pytest
+```
+
+Note: Make sure that pytest executable is installed in the virtual environment. To check which pytest executable is used, run the following command:
+
+```bash
+which pytest
+```
+
+It should return the path to the pytest executable in the virtual environment:
+
+```bash
+/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/data-theorem-assessment-oHUsPNxH-py3.10/bin/pytest
 ```

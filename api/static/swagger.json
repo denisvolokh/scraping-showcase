@@ -65,9 +65,6 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "500": {
             "description": "Internal server error"
           }
@@ -175,6 +172,9 @@
       "ScrapeResult": {
         "type": "object",
         "properties": {
+          "target_url": {
+            "type": "string"
+          },
           "result": {
             "$ref": "#/components/schemas/Scrape"
           },
@@ -186,6 +186,9 @@
       "AsyncScrapeResult": {
         "type": "object",
         "properties": {
+          "target_url": {
+            "type": "string"
+          },
           "result": {
             "$ref": "#/components/schemas/Scrape"
           },

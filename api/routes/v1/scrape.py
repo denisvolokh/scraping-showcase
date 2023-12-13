@@ -1,6 +1,5 @@
 import falcon
 from falcon import Request, Response
-from marshmallow import ValidationError
 
 from api.schemas.scrape import ScrapeResultSchema
 from api.utils.scrape import scrape_target_page
@@ -33,20 +32,14 @@ class ScrapeResource:
         """
 
         target_url = req.get_param("target_url", "")
+        if not target_url:
+            raise falcon.HTTPBadRequest(
+                title="Missing required parameter", description="target_url"
+            )
 
         schema = ScrapeResultSchema()
+        scraped_result = scrape_target_page(target_url)
 
-        try:
-            scraped_result = scrape_target_page(target_url)
-
-            result = schema.dump({"result": scraped_result})
-            resp.media = result
-            resp.status = falcon.HTTP_200
-        except ValidationError as e:
-            result = schema.dump(
-                {
-                    "error": f"Unable to scrape ({target_url}), exception: {e}",
-                }
-            )
-            resp.media = result
-            resp.status = falcon.HTTP_400
+        result = schema.dump({"result": scraped_result})
+        resp.media = result
+        resp.status = falcon.HTTP_200

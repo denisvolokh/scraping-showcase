@@ -21,11 +21,11 @@ class SynchHome:
         logger.info("Rendering page...")
 
         # Initialize chat history
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
+        if "synch_messages" not in st.session_state:
+            st.session_state.synch_messages = []
 
         # Display chat messages from history on app rerun
-        for message in st.session_state.messages:
+        for message in st.session_state.synch_messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
 
@@ -40,7 +40,7 @@ class SynchHome:
             # Display user message in chat message container
             st.chat_message("user").markdown(prompt)
             # Add user message to chat history
-            st.session_state.messages.append({"role": "user", "content": prompt})
+            st.session_state.synch_messages.append({"role": "user", "content": prompt})
 
             with st.spinner("Wait for it..."):
                 r = requests.get(
@@ -68,6 +68,6 @@ class SynchHome:
                     st.markdown(response)
 
                 # Add assistant response to chat history
-                st.session_state.messages.append(
+                st.session_state.synch_messages.append(
                     {"role": "assistant", "content": response}
                 )

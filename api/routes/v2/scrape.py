@@ -4,7 +4,6 @@ from typing import AsyncGenerator
 
 import falcon
 from falcon import Request, Response
-from marshmallow import ValidationError
 from redis.asyncio.client import Redis
 
 from api.schemas.scrape import AsyncScrapeResultSchema
@@ -34,37 +33,28 @@ class AsyncScrapeResource:
             content:
               application/json:
                 schema: AsyncScrapeResultSchema
-          400:
-            description: Invalid request
           500:
             description: Internal server error
         """
 
         target_url = req.get_param("target_url", "")
+        if not target_url:
+            raise falcon.HTTPBadRequest(
+                title="Missing required parameter", description="target_url"
+            )
 
         task = task_scrape_target.apply_async(args=[target_url])
 
         schema = AsyncScrapeResultSchema()
-
-        try:
-            result = schema.dump(
-                {
-                    "target_url": target_url,
-                    "task_id": task.id,
-                    "status": task.state,
-                }
-            )
-            resp.media = result
-            resp.status = falcon.HTTP_200
-        except ValidationError as e:
-            result = schema.dump(
-                {
-                    "target_url": target_url,
-                    "error": str(e),
-                }
-            )
-            resp.media = result
-            resp.status = falcon.HTTP_400
+        result = schema.dump(
+            {
+                "target_url": target_url,
+                "task_id": task.id,
+                "status": task.state,
+            }
+        )
+        resp.media = result
+        resp.status = falcon.HTTP_200
 
 
 class AsyncScrapeResultResource:
@@ -99,16 +89,6 @@ class AsyncScrapeResultResource:
 
         schema = AsyncScrapeResultSchema()
 
-        if not task_result.ready():
-            resp.media = schema.dump(
-                {
-                    "task_id": task_id,
-                    "status": task_result.state,
-                }
-            )
-            resp.status = falcon.HTTP_200
-            return
-
         if task_result.failed():
             resp.media = schema.dump(
                 {
@@ -117,7 +97,17 @@ class AsyncScrapeResultResource:
                     "error": str(task_result.result),
                 }
             )
-            resp.status = falcon.HTTP_400
+            resp.status = falcon.HTTP_200
+            return
+
+        if not task_result.ready():
+            resp.media = schema.dump(
+                {
+                    "task_id": task_id,
+                    "status": task_result.state,
+                }
+            )
+            resp.status = falcon.HTTP_200
             return
 
         resp.media = schema.dump(

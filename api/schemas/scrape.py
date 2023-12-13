@@ -15,6 +15,7 @@ class ScrapeSchema(Schema):
 class ScrapeResultSchema(Schema):
     """Schema to represent a result of a scrape request"""
 
+    target_url = fields.Str()
     result = fields.Nested(ScrapeSchema)
     error = fields.Str()
 

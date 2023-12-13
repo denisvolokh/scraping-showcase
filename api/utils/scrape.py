@@ -155,6 +155,7 @@ def scrape_target_page(url: str) -> Optional[dict]:
     Args:
         url (str): URL of the target page
     """
+
     base_url = convert_to_base_url(url)
     content = fetch_page_content(base_url)
     if not content:

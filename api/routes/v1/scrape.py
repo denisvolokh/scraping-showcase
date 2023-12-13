@@ -37,11 +37,9 @@ class ScrapeResource:
         schema = ScrapeResultSchema()
 
         try:
-            result = schema.dump(
-                {
-                    "result": scrape_target_page(target_url),
-                }
-            )
+            scraped_result = scrape_target_page(target_url)
+
+            result = schema.dump({"result": scraped_result})
             resp.media = result
             resp.status = falcon.HTTP_200
         except ValidationError as e:

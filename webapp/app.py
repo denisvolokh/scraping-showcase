@@ -1,4 +1,5 @@
 import asyncio
+from typing import Any
 
 import streamlit as st
 from streamlit_option_menu import option_menu
@@ -21,7 +22,7 @@ class Model:
     icon3 = "motherboard"
 
 
-async def view(model):
+async def view(model: Any) -> None:
     with st.sidebar:
         menuItem = option_menu(
             menu_title=model.menuTitle,
@@ -41,7 +42,7 @@ async def view(model):
         AsynchSSEHome().view(AsynchSSEHome.Model())
 
 
-async def main():
+async def main() -> None:
     await view(Model())
 
 

@@ -1,12 +1,7 @@
-import logging
-
 import requests
 import streamlit as st
 
 from .utils import validate_url
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 
 class SynchHome:
@@ -17,8 +12,6 @@ class SynchHome:
         st.title(model.pageTitle)
 
         st.write("Scraping a page in synchronous mode.")
-
-        logger.info("Rendering page...")
 
         # Initialize chat history
         if "synch_messages" not in st.session_state:

@@ -7,9 +7,6 @@ from sseclient import SSEClient
 
 from .utils import validate_url
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 
 class AsynchSSEHome:
     class Model:
@@ -21,8 +18,6 @@ class AsynchSSEHome:
         st.write(
             "Scraping a webpage in asynchronous mode and returning data via Server-Sent Events (SSE)."
         )
-
-        logger.info("Rendering page...")
 
         # Initialize chat history
         if "messages" not in st.session_state:
@@ -61,13 +56,8 @@ class AsynchSSEHome:
                 f"http://api:5000/v2/scrape/updates/{task_id}"
             )
 
-            logging.info(f"Waiting for SSE messages: {st.session_state['updates']}")
-
             for msg in st.session_state["updates"]:
-                logging.info(f"Received SSE message: {msg}")
-
                 if not msg.data:
-                    logging.info("Closing SSE connection")
                     st.session_state["updates"].resp.close()
                     return
 

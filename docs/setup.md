@@ -60,7 +60,7 @@ The web application is available at [http://0.0.0.0:5001/](http://0.0.0.0:5001/)
 
 ## Code Quality
 
-The project is configured to use [pre-commit](https://pre-commit.com/) hooks to ensure code quality. The following hooks are configured:
+The project is configured to use [pre-commit](https://pre-commit.com/) hooks to run tools isort, black, flake8, and mypy to ensure code quality. The following hooks are configured:
 
 - [isort](https://pypi.org/project/isort/) - sorts imports
 - [black](https://pypi.org/project/black/) - formats code

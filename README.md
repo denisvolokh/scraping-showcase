@@ -27,6 +27,12 @@ poetry shell
 poetry run pre-commit install
 ```
 
+Note: if it fails with the error `FatalError: git failed` need to initialize git repository first:
+
+```bash
+git init
+```
+
 ### Run application in Docker Compose
 
 ```bash

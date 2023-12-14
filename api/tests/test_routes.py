@@ -92,7 +92,7 @@ async def test_successful_sync_scrape_resource(mock_scrape, client):
     """Test /v1/scrape endpoint with synchronous scraping
 
     Args:
-        mock_scrape (Any): Mocked scrape_target_page function
+        mock_scrape (MagicMock): Mocked scrape_target_page function
         client (ASGIConductor): ASGIConductor client
     """
 
@@ -136,8 +136,8 @@ async def test_successful_async_scrape_resource(
     """Test /v2/scrape endpoint with asynchronous scraping
 
     Args:
-        mock_task_scrape (Any): Mocked task_scrape_target function
-        celery_task_mock (Any): Mocked Celery task result
+        mock_task_scrape (MagicMock): Mocked task_scrape_target function
+        celery_task_mock (MagicMock): Mocked Celery task result
         client (ASGIConductor): ASGIConductor client
     """
 
@@ -175,8 +175,8 @@ async def test_async_scrape_pending_result_resource(
     """Test /v2/scrape/result/{task_id} endpoint to get the result of the async scraping task
 
     Args:
-        mock_task_scrape (Any): Mocked task_scrape_target function
-        celery_task_async_result_pending_mock (Any): Mocked Celery task AsycnResult with pending state
+        mock_task_scrape (MagicMock): Mocked task_scrape_target function
+        celery_task_async_result_pending_mock (MagicMock): Mocked Celery task AsycnResult with pending state
         client (ASGIConductor): ASGIConductor client
     """
 
@@ -198,8 +198,8 @@ async def test_async_scrape_failed_result_resource(
     """Test /v2/scrape/result/{task_id} endpoint to get the result of the async scraping task
 
     Args:
-        mock_task_scrape (Any): Mocked task_scrape_target function
-        celery_task_async_result_failed_mock (Any): Mocked Celery task AsycnResult with failed state
+        mock_task_scrape (MagicMock): Mocked task_scrape_target function
+        celery_task_async_result_failed_mock (MagicMock): Mocked Celery task AsycnResult with failed state
         client (ASGIConductor): ASGIConductor client
     """
 
@@ -221,8 +221,8 @@ async def test_async_scrape_success_result_resource(
     """Test /v2/scrape/result/{task_id} endpoint to get the result of the async scraping task
 
     Args:
-        mock_task_scrape (Any): Mocked task_scrape_target function
-        celery_task_async_result_success_mock (Any): Mocked Celery task AsycnResult with success state
+        mock_task_scrape (MagicMock): Mocked task_scrape_target function
+        celery_task_async_result_success_mock (MagicMock): Mocked Celery task AsycnResult with success state
         client (ASGIConductor): ASGIConductor client
     """
 

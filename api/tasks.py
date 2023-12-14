@@ -2,8 +2,8 @@ import json
 import logging
 from typing import Optional
 
-import redis
 from celery import Celery, Task
+from redis import Redis
 
 from api.utils.scrape import scrape_target_page
 
@@ -18,7 +18,7 @@ app_name = "scrape-tasks-app"
 include = ["api.tasks"]
 
 celery = Celery(app_name, broker=BROKER_URL, backend=RESULT_BACKEND, include=include)
-redis_client = redis.Redis(host="redis", port=6379, db=0)
+redis_client = Redis(host="redis", port=6379, db=0)
 
 
 @celery.task(bind=True)

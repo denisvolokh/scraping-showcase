@@ -48,13 +48,13 @@ docker-compose ps
 Expected output:
 
 ```bash
-Name    | Image                           | Created         | Status     |    Ports               |
---------|---------------------------------|-----------------|------------|------------------------|
-api     | data-theorem-assessment-api     | 2 minutes ago   | Up         | 0.0.0.0:5000->5000/tcp |
-mkdocs  | data-theorem-assessment-mkdocs  | 2 minutes ago   | Up         | 0.0.0.0:5002->5002/tcp |
-redis   | redis:latest                    | 2 minutes ago   | Up         | 0.0.0.0:6379->6379/tcp |
-tasks   | data-theorem-assessment-tasks   | 2 minutes ago   | Up         |                        |
-webapp  | data-theorem-assessment-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
+Name    | Image                     | Created         | Status     |    Ports               |
+--------|---------------------------|-----------------|------------|------------------------|
+api     | scraping-showcase-api     | 2 minutes ago   | Up         | 0.0.0.0:5000->5000/tcp |
+mkdocs  | scraping-showcase-mkdocs  | 2 minutes ago   | Up         | 0.0.0.0:5002->5002/tcp |
+redis   | redis:latest              | 2 minutes ago   | Up         | 0.0.0.0:6379->6379/tcp |
+tasks   | scraping-showcase-tasks   | 2 minutes ago   | Up         |                        |
+webapp  | scraping-showcase-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
 ```
 
 The API server is available at [http://0.0.0.0:5000/](http://0.0.0.0:5000/).

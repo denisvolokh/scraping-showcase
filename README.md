@@ -11,7 +11,7 @@ This project is a showcase of web scraping capabilities. It showcases 3 approach
 ### Checkout the code
 
 ```bash
-git clone git@github.com:denisvolokh/data-theorem-assessment.git
+git clone git@github.com:denisvolokh/scraping-showcase.git
 ```
 
 ### Install Poetry and packages
@@ -54,13 +54,13 @@ docker-compose ps
 Expected output:
 
 ```bash
-Name    | Image                           | Created         | Status     |    Ports               |
---------|---------------------------------|-----------------|------------|------------------------|
-api     | data-theorem-assessment-api     | 2 minutes ago   | Up         | 0.0.0.0:5000->5000/tcp |
-mkdocs  | data-theorem-assessment-mkdocs  | 2 minutes ago   | Up         | 0.0.0.0:5002->5002/tcp |
-redis   | redis:latest                    | 2 minutes ago   | Up         | 0.0.0.0:6379->6379/tcp |
-tasks   | data-theorem-assessment-tasks   | 2 minutes ago   | Up         |                        |
-webapp  | data-theorem-assessment-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
+Name    | Image                     | Created         | Status     |    Ports               |
+--------|---------------------------|-----------------|------------|------------------------|
+api     | scraping-showcase-api     | 2 minutes ago   | Up         | 0.0.0.0:5000->5000/tcp |
+mkdocs  | scraping-showcase-mkdocs  | 2 minutes ago   | Up         | 0.0.0.0:5002->5002/tcp |
+redis   | redis:latest              | 2 minutes ago   | Up         | 0.0.0.0:6379->6379/tcp |
+tasks   | scraping-showcase-tasks   | 2 minutes ago   | Up         |                        |
+webapp  | scraping-showcase-webapp  | 2 minutes ago   | Up         | 0.0.0.0:5001->5001/tcp |
 ```
 
 The API server is available at [http://0.0.0.0:5000/](http://0.0.0.0:5000/).
@@ -104,5 +104,5 @@ which pytest
 It should return the path to the pytest executable in the virtual environment:
 
 ```bash
-/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/your-folder-oHUsPNxH-py3.10/bin/pytest
+/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/scraping-showcase-oHUsPNxH-py3.10/bin/pytest
 ```

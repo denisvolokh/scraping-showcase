@@ -5,7 +5,7 @@
 ### Checkout the code
 
 ```bash
-git clone git@github.com:denisvolokh/data-theorem-assessment.git
+git clone git@github.com:denisvolokh/scraping-showcase.git
 ```
 
 ### Install Poetry and packages

@@ -1,4 +1,10 @@
-# Data Theorem Assessment
+# Web Scraping Showcase Project
+
+This project is a showcase of web scraping capabilities. It showcases 3 approaches to web scraping:
+
+- Sync web scraping with requests and BeautifulSoup
+- Async web scraping with Celery and requests
+- Server Side Events (SSE)
 
 ## Setup Dev Environment
 
@@ -98,5 +104,5 @@ which pytest
 It should return the path to the pytest executable in the virtual environment:
 
 ```bash
-/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/data-theorem-assessment-oHUsPNxH-py3.10/bin/pytest
+/Users/denys.volokh/Library/Caches/pypoetry/virtualenvs/your-folder-oHUsPNxH-py3.10/bin/pytest
 ```
